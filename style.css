@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'ChangwonDangamRounded';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2511-1@1.0/ChangwonDangamRound-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+body, input, button, ul, li {
+    font-family: 'ChangwonDangamRounded', sans-serif;
+    letter-spacing: 2px;
+}
+
+body {
+    /* background-image: url("./images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; */
+    text-align: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#greeting {
+    font-size: 40px;
+    padding: 20px;
+    font-weight: 700;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+}
+
+#nameInput {
+    flex: 1;
+    padding: 10px;
+}
+
+#saveNameBtn {
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
+
+#todoInput {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#addTodoBtn {
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
