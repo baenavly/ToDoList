@@ -2,7 +2,7 @@ const greeting = document.getElementById("greeting");
 const nameInputArea = document.getElementById("nameInputArea");
 const nameInput = document.getElementById("nameInput");
 const saveNameBtn = document.getElementById("saveNameBtn");
-const todoArea = document.getElementById("todoArea")
+const todoArea = document.getElementById("todoArea");
 
 function showGreeting() {
   const savedName = localStorage.getItem("name");
@@ -29,6 +29,14 @@ const todoInput = document.getElementById("todoInput");
 const addTodoBtn = document.getElementById("addTodoBtn");
 const list = document.getElementById("todoList");
 
+function loadTodos() {
+  return JSON.parse(localStorage.getItem("todos")) || [];
+}
+
+function saveTodos(todos) {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
 addTodoBtn.addEventListener("click", () => {
     const text = todoInput.value.trim();
     if (text === "") return;
@@ -44,7 +52,21 @@ addTodoBtn.addEventListener("click", () => {
     li.appendChild(checkbox);
     li.appendChild(span);
 
-    list.appendChild(li);
+    list.prepend(li);
 
     todoInput.value = "";
+
+    let todos = loadTodos();
+
+    let todo = {
+      id: Date.now(),
+      text: text,
+      createdAt: Date.now(),
+      ModifiedAt: Date.now(),
+      completed: false
+    };
+
+    todos.push(todo);
+
+    saveTodos(todos);
 });
