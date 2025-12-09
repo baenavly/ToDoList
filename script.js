@@ -4,6 +4,11 @@ const nameInput = document.getElementById("nameInput");
 const saveNameBtn = document.getElementById("saveNameBtn");
 const todoArea = document.getElementById("todoArea");
 
+const todoInput = document.getElementById("todoInput");
+const addTodoBtn = document.getElementById("addTodoBtn");
+const list = document.getElementById("todoList");
+
+// 저장된 이름 있으면 인삿말, 없으면 입력 받는 함수
 function showGreeting() {
   const savedName = localStorage.getItem("name");
   todoArea.style.display = "none";
@@ -15,58 +20,90 @@ function showGreeting() {
   }
 }
 
-showGreeting();
-
-saveNameBtn.addEventListener("click", () => {
-    const name = nameInput.value.trim();
-    if (name === "") return;
-
-    localStorage.setItem("name", name);
-    showGreeting();
-});
-
-const todoInput = document.getElementById("todoInput");
-const addTodoBtn = document.getElementById("addTodoBtn");
-const list = document.getElementById("todoList");
-
+// localStorage에서 Todos 가져오는 함수
 function loadTodos() {
   return JSON.parse(localStorage.getItem("todos")) || [];
 }
 
+// localStorage에서 Todos 저장하는 함수
 function saveTodos(todos) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-addTodoBtn.addEventListener("click", () => {
-    const text = todoInput.value.trim();
-    if (text === "") return;
+// Todos 가져와서 화면에 새로 렌더링하는 함수
+function renderTodos() {
+  const todos = loadTodos();
+  list.innerHTML = "";
 
+  todos.forEach(todo => {
     const li = document.createElement("li");
+    li.dataset.id = todo.id;
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.checked = todo.completed;
 
     const span = document.createElement("span");
-    span.textContent = text;
+    span.textContent = todo.text;
+
+    if (todo.completed) span.classList.add("checked");
 
     li.appendChild(checkbox);
     li.appendChild(span);
 
-    list.prepend(li);
+    list.appendChild(li);
+  });
+}
 
-    todoInput.value = "";
+// 새 Todo를 추가하는 함수
+function addTodo() {
+  const text = todoInput.value.trim();
+  if (!text) return;
+
+  const todos = loadTodos();
+
+  const todo = {
+    id: Date.now(),
+    text,
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+    completed: false
+  };
+
+  todos.unshift(todo);
+  saveTodos(todos);
+  renderTodos();
+}
+
+
+showGreeting();
+
+saveNameBtn.addEventListener("click", () => {
+  const name = nameInput.value.trim();
+  if (name === "") return;
+
+  localStorage.setItem("name", name);
+  showGreeting();
+});
+
+renderTodos();
+
+addTodoBtn.addEventListener("click", () => {
+  addTodo();
+});
+
+list.addEventListener("change", (e) => {
+  if (e.target.type === "checkbox") {
+    const li = e.target.closest("li");
+    const id = Number(li.dataset.id);
 
     let todos = loadTodos();
+    const todo = todos.find(t => t.id === id);
 
-    let todo = {
-      id: Date.now(),
-      text: text,
-      createdAt: Date.now(),
-      ModifiedAt: Date.now(),
-      completed: false
-    };
-
-    todos.push(todo);
+    todo.completed = e.target.checked;
+    todo.updatedAt = Date.now();
 
     saveTodos(todos);
-});
+    renderTodos();
+  }
+})
