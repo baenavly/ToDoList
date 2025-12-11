@@ -1,12 +1,12 @@
 @font-face {
-    font-family: 'ChangwonDangamRounded';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2511-1@1.0/ChangwonDangamRound-Regular.woff2') format('woff2');
+    font-family: 'OngleipRyuryu';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2405-2@1.0/Ownglyph_ryurue-Rg.woff2') format('woff2');
     font-weight: normal;
     font-display: swap;
 }
 
 body, input, button, ul, li {
-    font-family: 'ChangwonDangamRounded', sans-serif;
+    font-family: 'OngleipRyuryu', sans-serif;
     letter-spacing: 2px;
 }
 
@@ -17,13 +17,13 @@ body {
     background-position: center; */
     text-align: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 35px;
 }
 
 #greeting {
-    font-size: 45px;
-    margin-top: 20px;
-    padding: 20px;
+    font-size: 60px;
+    margin-top: 40px;
+    padding: 30px;
     font-weight: 700;
 }
 
@@ -31,12 +31,12 @@ body {
     display: flex;
     height: 65px;
     gap: 10px;
-    padding: 20px;
+    padding: 20px 50px;
 }
 
 #nameInput {
     flex: 1;
-    font-size: 30px;
+    font-size: 35px;
     padding: 10px;
     border: none;
     align-self: flex-end;
@@ -47,14 +47,14 @@ body {
 #saveNameBtn {
     padding: 10px;
     width: 100px;
-    font-size: 30px;
+    font-size: 35px;
     background-color: black;
     color: white;
 }
 
 #todoInput {
     flex: 1;
-    font-size: 30px;
+    font-size: 35px;
     padding: 10px;
     border: none;
     align-self: flex-end;
@@ -65,7 +65,7 @@ body {
 #addTodoBtn {
     padding: 10px;
     width: 100px;
-    font-size: 30px;
+    font-size: 35px;
     background-color: black;
     color: white;
 }
@@ -79,6 +79,7 @@ li {
 ul {
     display: flex;
     flex-direction: column;
+    padding: 20px 50px;
     gap: 45px;
 }
 
@@ -93,36 +94,28 @@ ul {
     border-bottom: 2px solid #dadada84;
   }
 
-  #todoList input[type="checkbox"] {
-    position: absolute;
-    left: 0;
+#todoList input[type="checkbox"] {
+    margin-bottom: 0px;
+    appearance: none;
+    -webkit-appearance: none;
     width: 50px;
     height: 50px;
-    opacity: 0;
     cursor: pointer;
-  }
-
-  #todoList li span {
-    padding-left: 60px;
-    position: relative;
-    pointer-events: none;
-  }
-  
-  #todoList li span::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: auto;
-    bottom: 0;
-    width: 50px;
-    height: 50px;
-    background-image: url("./images/before.png");
+    background-image: url('./images/before.png');
     background-size: contain;
     background-repeat: no-repeat;
-    pointer-events: none;
+    border: none;
+    outline: none;
   }
   
-#todoList input[type="checkbox"]:checked + span::before {
-    background-image: url("./images/after.png"); 
+  #todoList input[type="checkbox"]:checked {
+    background-image: url('./images/after.png');
   }
-  
+
+  #editTodoInput {
+    flex: 1;
+    font-size: 35px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #000;
+  }
