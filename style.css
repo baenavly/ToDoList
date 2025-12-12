@@ -5,19 +5,48 @@
     font-display: swap;
 }
 
+:root {
+    --bg: #fff8e8;
+    --main: #5A4634;
+    --textlight: #897c6f;
+    --done: #ff0000b3;
+    --borderlight: #98806c52;
+  }
+
 body, input, button, ul, li {
     font-family: 'OngleipRyuryu', sans-serif;
     letter-spacing: 2px;
 }
 
 body {
-    /* background-image: url("./images/background.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center; */
+    background-color: var(--bg);
+    color: var(--main);
     text-align: center;
     align-items: center;
     font-size: 35px;
+}
+
+button {
+    background-color: var(--main);
+    border: none;
+    color: white;
+}
+  
+
+#todoInput, #nameInput {
+    flex: 1;
+    font-size: 35px;
+    padding: 10px;
+    background-color: var(--bg);
+    border: none;
+    border-bottom: 2px solid var(--main);
+    color: var(--main);
+    align-self: flex-end;
+    outline: none;
+}
+
+::placeholder {
+    color: var(--textlight);
 }
 
 #greeting {
@@ -34,46 +63,25 @@ body {
     padding: 20px 50px;
 }
 
-#nameInput {
-    flex: 1;
-    font-size: 35px;
-    padding: 10px;
-    border: none;
-    align-self: flex-end;
-    border-bottom: 2px solid #000000a6;
-    outline: none;
-}
-
 #saveNameBtn {
     padding: 10px;
     width: 100px;
     font-size: 35px;
-    background-color: black;
-    color: white;
-}
-
-#todoInput {
-    flex: 1;
-    font-size: 35px;
-    padding: 10px;
-    border: none;
-    align-self: flex-end;
-    border-bottom: 2px solid #000000a6;
-    outline: none;
 }
 
 #addTodoBtn {
     padding: 10px;
     width: 100px;
     font-size: 35px;
-    background-color: black;
-    color: white;
 }
 
 li {
     list-style: none;
     display: flex;
     gap: 8px;
+    position: relative;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--borderlight);
 }
 
 ul {
@@ -84,15 +92,8 @@ ul {
 }
 
 .checked {
-    text-decoration: line-through rgba(255, 0, 0, 0.7);
+    text-decoration: line-through var(--done);
 }
-
-#todoList li {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    border-bottom: 2px solid #dadada84;
-  }
 
 #todoList input[type="checkbox"] {
     margin-bottom: 0px;
@@ -115,7 +116,13 @@ ul {
   #editTodoInput {
     flex: 1;
     font-size: 35px;
+    background-color: var(--bg);
     border: none;
+    /* border-bottom: 2px solid var(--border); */
+    color: var(--main);
     outline: none;
-    border-bottom: 2px solid #000;
-  }
+}
+
+li.editing {
+    border-bottom: 2px solid var(--main); 
+}

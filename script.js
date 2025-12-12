@@ -152,6 +152,7 @@ function handleTodoClick(e) {
 
   span.style.display = "none";
 
+  li.classList.add("editing");
   const editTodoInput = document.createElement("input");
   editTodoInput.type = "text";
   editTodoInput.value = todo.text;
@@ -166,6 +167,7 @@ function handleTodoClick(e) {
       todo.updatedAt = Date.now();
       saveTodos(todos);
     }
+    li.classList.remove("editing");
     renderTodos();
   };
   
