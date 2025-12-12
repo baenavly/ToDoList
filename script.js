@@ -115,6 +115,17 @@ function enterKeyup(element, func) {
   })
 }
 
+// input창에 focus되면 밑줄 색 진하게 바꿔주는 함수 (css 적용할 수 있게 class 추가 & 제거)
+function handleInputFocus(e) {
+  const input = e.target;
+  input.classList.add("editing");
+}
+
+function handleInputBlur(e) {
+  const input = e.target;
+  input.classList.remove("editing");
+}
+
 // 체크 박스 클릭 시 todo 완료 처리하는 함수
 function handleCheckbox(e) {
   if (!e.target.matches("input[type='checkbox']")) return;
@@ -177,6 +188,12 @@ function handleTodoClick(e) {
 
 showGreeting();
 renderTodos();
+
+nameInput.addEventListener("focus", handleInputFocus);
+nameInput.addEventListener("blur", handleInputBlur);
+
+todoInput.addEventListener("focus", handleInputFocus);
+todoInput.addEventListener("blur", handleInputBlur);
 
 saveNameBtn.addEventListener("click", saveName);
 addTodoBtn.addEventListener("click", addTodo);

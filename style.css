@@ -33,16 +33,20 @@ button {
 }
   
 
-#todoInput, #nameInput {
+.text-input {
     flex: 1;
     font-size: 35px;
     padding: 10px;
     background-color: var(--bg);
     border: none;
-    border-bottom: 2px solid var(--main);
+    border-bottom: 2px solid var(--borderlight);
     color: var(--main);
     align-self: flex-end;
     outline: none;
+}
+
+.text-input.editing {
+    border-bottom-color: var(--main);
 }
 
 ::placeholder {
