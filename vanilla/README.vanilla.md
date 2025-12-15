@@ -1,4 +1,4 @@
-# 📝 Todo List (Vanilla JavaScript)
+# 🥔 PotaTodo (Vanilla JavaScript)
 
 이 프로젝트는 **Vanilla JavaScript만 사용하여 구현한 개인화 Todo List 애플리케이션**입니다.
 브라우저의 `localStorage`를 SSOT(단일 데이터 저장소)로 사용하여, 새로고침 이후에도 사용자 이름과 Todo 상태가 유지됩니다.
@@ -49,7 +49,7 @@
 ## 📂 프로젝트 구조
 
 ```
-📦 todo-list
+📦 vanilla
  ┣ 📜 index.html      # HTML 구조
  ┣ 📜 style.css       # 스타일 정의
  ┣ 📜 script.js       # 애플리케이션 로직
