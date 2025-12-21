@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Todo } from "../types/todo";
+import { type Todo } from "../types/todo";
 import { loadTodos } from "../utils/storage";
 
 export function useTodos() {
