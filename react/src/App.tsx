@@ -1,57 +1,39 @@
-import { useState } from "react";
-import type { Todo } from "./types/todo";
+import { useState, useEffect, useMemo } from "react";
+import Greeting from "./components/Greeting";
+import useTodos from "./hooks/useTodos";
+import TodoInput from "./components/Todo/TodoInput";
+import TodoList from "./components/Todo/TodoList";
+import NameInput from "./components/NameForm/NameInput";
+import { sortTodos } from "./utils/todos";
+import "./App.css";
 
 function App() {
-  const [name, setName] = useState("");
-  const [todoInput, setTodoInput] = useState("");
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [name, setName] = useState(() => {
+    return localStorage.getItem("name") ?? ""; // a ?? b a가 null 또는 undefined이면 b를 써라
+  });
 
-  const handleNameSubmit = () => {
-    if (!nameInput.trim()) return;
-    setName(nameInput)
-  };
+  useEffect(() => {
+    if (name) {
+      localStorage.setItem("name", name);
+    }
+  }, [name]);
 
-  const handleTodoSubmit = () => {
-    if (!todoInput.trim()) return;
-    
-    const newTodo = {
-      id: Date.now(),
-      text: todoInput,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-      completed: false,
-    };
+  const { todos, addTodo, toggleTodo } = useTodos();
 
-    setTodos(prev => [newTodo, ...prev]);
-    setTodoInput("");
-  };
+  const sortedTodos = useMemo(() => sortTodos(todos), [todos]);
 
   return (
-    <div>
+    <>
       {name === "" ? (
-        
+        <NameInput onSubmitName={setName} />
       ) : (
         <>
-          <h1>{name}님 안녕하세요!</h1>
-
-          <div>
-            <input
-              type="text"
-              placeholder="할 일을 입력하세요"
-              value={todoInput}
-              onChange={(e) => setTodoInput(e.target.value)}
-            />
-            <button onClick={handleTodoSubmit}>추가</button>
-          </div>
-          
-          <ul>
-            {todos.map(todo => (
-              <li key={todo.id}>{todo.text}</li>
-            ))}
-          </ul>
+          <Greeting name={name} />
+          <TodoInput onSubmitTodo={addTodo} />
+          <TodoList todos={sortedTodos} onToggleTodo={toggleTodo} />
         </>
       )}
-    </div>
+    </>
   );
 }
 

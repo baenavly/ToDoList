@@ -1,0 +1,136 @@
+@font-face {
+  font-family: "OngleipRyuryu";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2405-2@1.0/Ownglyph_ryurue-Rg.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #fff8e8;
+  --main: #5a4634;
+  --textlight: #897c6f;
+  --done: #ff0000b3;
+  --borderlight: #98806c52;
+}
+
+body,
+input,
+button,
+ul,
+li {
+  font-family: "OngleipRyuryu", sans-serif;
+  letter-spacing: 2px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--main);
+  text-align: center;
+  align-items: center;
+  font-size: 35px;
+}
+
+button {
+  background-color: var(--main);
+  border: none;
+  color: white;
+}
+
+.text-input {
+  flex: 1;
+  font-size: 35px;
+  padding: 10px;
+  background-color: var(--bg);
+  border: none;
+  border-bottom: 2px solid var(--borderlight);
+  color: var(--main);
+  align-self: flex-end;
+  outline: none;
+}
+
+.text-input.editing {
+  border-bottom-color: var(--main);
+}
+
+::placeholder {
+  color: var(--textlight);
+}
+
+#greeting {
+  font-size: 60px;
+  margin-top: 40px;
+  padding: 30px;
+  font-weight: 700;
+}
+
+.input-area {
+  display: flex;
+  height: 65px;
+  gap: 10px;
+  padding: 20px 50px;
+}
+
+#saveNameBtn {
+  padding: 10px;
+  width: 100px;
+  font-size: 35px;
+}
+
+#addTodoBtn {
+  padding: 10px;
+  width: 100px;
+  font-size: 35px;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  position: relative;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--borderlight);
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 50px;
+  gap: 45px;
+}
+
+.checked {
+  text-decoration: line-through var(--done);
+}
+
+#todoList input[type="checkbox"] {
+  margin-bottom: 0px;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-image: url("./src/assets/before.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+}
+
+#todoList input[type="checkbox"]:checked {
+  background-image: url("./src/assets/after.png");
+}
+
+#editTodoInput {
+  flex: 1;
+  font-size: 35px;
+  background-color: var(--bg);
+  border: none;
+  /* border-bottom: 2px solid var(--border); */
+  color: var(--main);
+  outline: none;
+}
+
+li.editing {
+  border-bottom: 2px solid var(--main);
+}

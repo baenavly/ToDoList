@@ -1,16 +1,39 @@
-import { useEffect, useState } from "react";
-import { type Todo } from "../types/todo";
-import { loadTodos } from "../utils/storage";
+import { useState, useEffect } from "react";
+import type { Todo } from "../types/todo";
+import { loadTodos, saveTodos } from "../utils/storage";
 
-export function useTodos() {
-    const [todos, setTodos] = useState<Todo[]>([]);
+function useTodos() {
+  const [todos, setTodos] = useState<Todo[]>(() => loadTodos());
 
-    useEffect(() => {
-        const storedTodos = loadTodos();
-        setTodos(storedTodos);
-    }, []);
+  useEffect(() => {
+    saveTodos(todos);
+  }, [todos]);
 
-    return {
-        todos,
+  const addTodo = (text: string) => {
+    const newTodo = {
+      id: Date.now(),
+      text,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      completed: false,
     };
+
+    setTodos((prev) => [newTodo, ...prev]);
+  };
+
+  const toggleTodo = (id: number) => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  return {
+    todos,
+    addTodo,
+    toggleTodo,
+  };
 }
+
+export default useTodos;
