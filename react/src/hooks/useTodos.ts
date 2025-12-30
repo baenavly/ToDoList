@@ -29,10 +29,21 @@ function useTodos() {
     );
   };
 
+  const editTodo = (id: number, newText: string) => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === id
+          ? { ...todo, text: newText, updatedAt: Date.now() }
+          : todo
+      )
+    );
+  };
+
   return {
     todos,
     addTodo,
     toggleTodo,
+    editTodo,
   };
 }
 

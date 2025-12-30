@@ -18,7 +18,7 @@ function App() {
     }
   }, [name]);
 
-  const { todos, addTodo, toggleTodo } = useTodos();
+  const { todos, addTodo, toggleTodo, editTodo } = useTodos();
 
   const sortedTodos = useMemo(() => sortTodos(todos), [todos]);
 
@@ -30,7 +30,11 @@ function App() {
         <>
           <Greeting name={name} />
           <TodoInput onSubmitTodo={addTodo} />
-          <TodoList todos={sortedTodos} onToggleTodo={toggleTodo} />
+          <TodoList
+            todos={sortedTodos}
+            onToggleTodo={toggleTodo}
+            onEditTodo={editTodo}
+          />
         </>
       )}
     </>
@@ -38,3 +42,6 @@ function App() {
 }
 
 export default App;
+
+// focus, blur 이벤트로 editing 효과 주기
+// modify 기능 추가하기

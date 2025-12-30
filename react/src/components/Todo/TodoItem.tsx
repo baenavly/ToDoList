@@ -1,25 +1,52 @@
+import { useState } from "react";
 import type { Todo } from "../../types/todo";
 
 type TodoItemProps = {
   todo: Todo;
   onToggleTodo: (id: number) => void;
+  onEditTodo: (id: number, newText: string) => void;
 };
 
-function TodoItem({ todo, onToggleTodo }: TodoItemProps) {
+function TodoItem({ todo, onToggleTodo, onEditTodo }: TodoItemProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(todo.text);
+
+  const handleSave = () => {
+    const trimmed = editText.trim();
+    if (!trimmed) return;
+
+    onEditTodo(todo.id, trimmed);
+    setIsEditing(false);
+  };
+
   return (
-    <li>
+    <li className={isEditing ? "editing" : ""}>
       <input
         type="checkbox"
         checked={todo.completed}
         onChange={() => onToggleTodo(todo.id)}
       />
-      <span
-        style={{
-          textDecoration: todo.completed ? "line-through" : "none",
-        }}
-      >
-        {todo.text}
-      </span>
+
+      {isEditing ? (
+        <input
+          id="editTodoInput"
+          value={editText}
+          onChange={(e) => setEditText(e.target.value)}
+          onBlur={handleSave}
+          onKeyUp={(e) => e.key === "Enter" && handleSave()}
+          autoFocus
+        />
+      ) : (
+        <span
+          className={todo.completed ? "checked" : ""}
+          onClick={() => {
+            if (todo.completed) return;
+            setIsEditing(true);
+          }}
+        >
+          {todo.text}
+        </span>
+      )}
     </li>
   );
 }

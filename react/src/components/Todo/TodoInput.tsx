@@ -6,6 +6,7 @@ type TodoInputProps = {
 
 function TodoInput({ onSubmitTodo }: TodoInputProps) {
   const [todoInput, setTodoInput] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmitTodo = () => {
     if (!todoInput.trim()) return;
@@ -17,11 +18,13 @@ function TodoInput({ onSubmitTodo }: TodoInputProps) {
   return (
     <div className="input-area">
       <input
-        className="text-input"
+        className={`text-input ${isFocused ? "editing" : ""}`}
         id="todoInput"
         type="text"
         placeholder="할 일을 입력하세요"
         value={todoInput}
+        onKeyUp={(e) => e.key === "Enter" && handleSubmitTodo()}
+        onFocus={() => setIsFocused(true)}
         onChange={(e) => setTodoInput(e.target.value)}
       />
       <button id="addTodoBtn" onClick={handleSubmitTodo}>
