@@ -12,7 +12,7 @@ function TodoItem({ todo, onToggleTodo, onEditTodo }: TodoItemProps) {
   const [editText, setEditText] = useState(todo.text);
 
   const handleSave = () => {
-    const trimmed = editText.trim();
+    const trimmed = editText.trim(); // 앞뒤 공백 제거
     if (!trimmed) return;
 
     onEditTodo(todo.id, trimmed);

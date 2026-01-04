@@ -42,6 +42,3 @@ function App() {
 }
 
 export default App;
-
-// focus, blur 이벤트로 editing 효과 주기
-// modify 기능 추가하기

@@ -23,6 +23,7 @@ function NameInput({ onSubmitName }: NameInputProps) {
         value={nameInput}
         onKeyUp={(e) => e.key === "Enter" && handleSubmitName()}
         onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         onChange={(e) => setNameInput(e.target.value)}
       />
       <button id="saveNameBtn" onClick={handleSubmitName}>
