@@ -1,42 +1,34 @@
-const greeting = document.getElementById("greeting");
-const nameInputArea = document.getElementById("nameInputArea");
-const nameInput = document.getElementById("nameInput");
-const saveNameBtn = document.getElementById("saveNameBtn");
-const todoArea = document.getElementById("todoArea");
+import { getUsers, saveUsers, getCurrentUser } from "./storage.js";
+import { guardAuth, logout } from "./auth.js";
+import { handleInputFocus, handleInputBlur, enterKeyup } from "./utils/dom.js";
 
+const greeting = document.getElementById("greeting");
+const logoutBtn = document.getElementById("logoutBtn");
+const list = document.getElementById("todoList");
 const todoInput = document.getElementById("todoInput");
 const addTodoBtn = document.getElementById("addTodoBtn");
-const list = document.getElementById("todoList");
-
-// 이름 저장하고 화면 새로 렌더링하는 함수
-function saveName() {
-  const name = nameInput.value.trim();
-  if (name === "") return;
-
-  localStorage.setItem("name", name);
-  showGreeting();
-}
 
 // 저장된 이름 있으면 인삿말, 없으면 입력 받는 함수
 function showGreeting() {
-  const savedName = localStorage.getItem("name");
-  todoArea.style.display = "none";
-
+  const savedName = getCurrentUser();
   if (savedName) {
     greeting.textContent = `${savedName}님 안녕하세요!`;
-    nameInputArea.style.display = "none";
-    todoArea.style.display = "block";
   }
 }
 
-// localStorage에서 Todos 가져오는 함수 (string -> 객체)
+// 현재 유저의 Todo 있으면 불러오기
 function loadTodos() {
-  return JSON.parse(localStorage.getItem("todos")) || [];
+  const users = getUsers();
+  const user = getCurrentUser();
+  return users[user]?.todos || [];
 }
 
-// localStorage에 Todos 저장하는 함수 (객체 -> string)
+// 현재 유저의 Todo 저장하기
 function saveTodos(todos) {
-  localStorage.setItem("todos", JSON.stringify(todos));
+  const users = getUsers();
+  const user = getCurrentUser();
+  users[user].todos = todos;
+  saveUsers(users);
 }
 
 // id 비교하여 todo 항목 찾아오는 함수
@@ -105,27 +97,6 @@ function addTodo() {
   todoInput.value = "";
 }
 
-// 엔터 치면 버튼 눌리도록 하는 유틸 함수
-// (keydown은 한글 value값 전송 시 조합 문제 발생할 수 있어 keyup 사용)
-function enterKeyup(element, func) {
-  element.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-      func();
-    }
-  });
-}
-
-// input창에 focus되면 밑줄 색 진하게 바꿔주는 함수 (css 적용할 수 있게 class 추가 & 제거)
-function handleInputFocus(e) {
-  const input = e.target;
-  input.classList.add("editing");
-}
-
-function handleInputBlur(e) {
-  const input = e.target;
-  input.classList.remove("editing");
-}
-
 // 체크 박스 클릭 시 todo 완료 처리하는 함수
 function handleCheckbox(e) {
   if (!e.target.matches("input[type='checkbox']")) return;
@@ -186,19 +157,17 @@ function handleTodoClick(e) {
   editTodoInput.addEventListener("blur", saveEdit);
 }
 
+guardAuth();
 showGreeting();
-renderTodos();
+logoutBtn.addEventListener("click", logout);
 
-nameInput.addEventListener("focus", handleInputFocus);
-nameInput.addEventListener("blur", handleInputBlur);
+renderTodos();
 
 todoInput.addEventListener("focus", handleInputFocus);
 todoInput.addEventListener("blur", handleInputBlur);
 
-saveNameBtn.addEventListener("click", saveName);
 addTodoBtn.addEventListener("click", addTodo);
 
-enterKeyup(nameInput, saveName);
 enterKeyup(todoInput, addTodo);
 
 list.addEventListener("change", handleCheckbox);

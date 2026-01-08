@@ -1,0 +1,182 @@
+/*************************
+ * 1️⃣ Font
+ *************************/
+@font-face {
+  font-family: "OngleipRyuryu";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2405-2@1.0/Ownglyph_ryurue-Rg.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-display: swap;
+}
+
+/*************************
+ * 2️⃣ CSS Variables
+ *************************/
+:root {
+  --bg: #fff8e8;
+  --main: #5a4634;
+  --textlight: #897c6f;
+  --done: #ff0000b3;
+  --borderlight: #98806c52;
+}
+
+/*************************
+ * 3️⃣ Base (Global)
+ *************************/
+body,
+input,
+button,
+ul,
+li {
+  font-family: "OngleipRyuryu", sans-serif;
+  letter-spacing: 2px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--main);
+  font-size: 35px;
+  margin: 0;
+}
+
+button {
+  background-color: var(--main);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/*************************
+ * 4️⃣ Layout
+ *************************/
+
+/* 로그인 페이지 중앙 정렬 */
+.login-page {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 상단 헤더 (로그아웃 버튼) */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 50px;
+}
+
+/* input + button 공통 레이아웃 */
+.input-area {
+  display: flex;
+  height: 65px;
+  gap: 10px;
+  padding: 20px 50px;
+}
+
+/* todo list layout */
+ul {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 50px;
+  gap: 45px;
+}
+
+/*************************
+ * 5️⃣ Components
+ *************************/
+.text-input {
+  flex: 1;
+  font-size: 35px;
+  padding: 10px;
+  background-color: var(--bg);
+  border: none;
+  border-bottom: 2px solid var(--borderlight);
+  color: var(--main);
+  outline: none;
+}
+
+.text-input.editing {
+  border-bottom-color: var(--main);
+}
+
+::placeholder {
+  color: var(--textlight);
+}
+
+#loginBtn {
+  padding: 10px;
+  width: 100px;
+  font-size: 30px;
+}
+
+#addTodoBtn {
+  padding: 10px;
+  width: 100px;
+  font-size: 35px;
+}
+
+#logoutBtn {
+  font-size: 20px;
+  padding: 8px 16px;
+}
+
+/*************************
+ * 6️⃣ Page-specific
+ *************************/
+
+/* greeting은 콘텐츠 영역이므로 중앙 정렬 */
+#greeting {
+  font-size: 60px;
+  padding: 30px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/*************************
+ * 7️⃣ Todo Item
+ *************************/
+li {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  position: relative;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--borderlight);
+}
+
+.checked {
+  text-decoration: line-through var(--done);
+}
+
+#todoList input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-image: url("./images/before.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+}
+
+#todoList input[type="checkbox"]:checked {
+  background-image: url("./images/after.png");
+}
+
+#editTodoInput {
+  flex: 1;
+  font-size: 35px;
+  background-color: var(--bg);
+  border: none;
+  color: var(--main);
+  outline: none;
+}
+
+/*************************
+ * 8️⃣ States
+ *************************/
+li.editing {
+  border-bottom: 2px solid var(--main);
+}

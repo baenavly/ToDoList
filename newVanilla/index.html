@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <button id="logoutBtn">로그아웃</button>
+    </header>
+    <div id="greeting"></div>
+    <div id="todoArea">
+      <div class="input-area">
+        <input
+          type="text"
+          class="text-input"
+          id="todoInput"
+          placeholder="할 일을 입력하세요"
+        />
+        <button id="addTodoBtn">추가</button>
+      </div>
+
+      <ul id="todoList"></ul>
+    </div>
+
+    <script type="module" src="./js/todo.js"></script>
+  </body>
+</html>
