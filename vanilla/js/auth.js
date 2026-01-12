@@ -8,7 +8,7 @@ export function guardAuth() {
   }
 }
 
-// 로그아웃 시 정보 삭제하고 로그인 페이지 듸우기
+// 로그아웃 시 정보 삭제하고 로그인 페이지 띄우기
 export function logout() {
   clearCurrentUser();
   location.href = "login.html";
